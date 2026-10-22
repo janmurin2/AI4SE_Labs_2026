@@ -1,0 +1,27 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	load_corpus(load_corpus)
+	extract(extract)
+	cluster(cluster)
+	coverage_check(coverage_check)
+	write(write)
+	review(review)
+	render(render)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> load_corpus;
+	cluster --> coverage_check;
+	coverage_check --> write;
+	extract --> cluster;
+	load_corpus --> extract;
+	review -.-> cluster;
+	review -.-> render;
+	write --> review;
+	render --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

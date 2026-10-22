@@ -1,0 +1,460 @@
+[
+ {
+  "iteration": 1,
+  "approved": false,
+  "coverage_ok": false,
+  "missing_candidates": 14,
+  "score": 44,
+  "issues": [
+   {
+    "kind": "missing",
+    "keys": [
+     "C-019"
+    ],
+    "description": "The candidate requires the Material Volume Report to be recorded and tracked in the project requirements tracker, but no requirement covers this documentation traceability activity.",
+    "suggested_fix": "Add a documentation requirement covering requirements-tracker maintenance and map C-019 to it, or explicitly discard C-019 with a rationale that tracker maintenance is outside the system specification."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "C-222",
+     "C-307",
+     "C-475",
+     "C-489",
+     "C-660"
+    ],
+    "description": "These candidates are reported as missing by the coverage check. K043 covers missing/damaged item reporting but does not cover periodic missing-item reports (C-222), fines-stopped-reason reporting (C-307 and C-489), a canned missing-status report (C-475), or the general weeding-report capability (C-660).",
+    "suggested_fix": "Add the missing report behaviors to appropriately scoped requirements—such as K043, K157, or new dedicated requirements—and map each candidate explicitly. Do not claim coverage merely through a broad generic report requirement."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "C-569"
+    ],
+    "description": "The candidate requires WorldCat integration or workflow support, while K056 only requires last-copy identification and does not require integration with or workflow support for WorldCat.",
+    "suggested_fix": "Either add an explicit external-catalog/WorldCat workflow requirement and map C-569 to it, or narrow/discard C-569 with a rationale that external catalog integration is out of scope."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "C-577"
+    ],
+    "description": "The candidate requires efficient cleanup tools and operations, but the current requirements cover specific cleanup utilities without a performance or efficiency requirement for orphaned-record cleanup.",
+    "suggested_fix": "Add measurable performance or batch-efficiency criteria to K058 or create a dedicated cleanup-performance requirement; otherwise discard C-577 with a documented scope decision."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "C-582",
+     "C-583",
+     "C-667"
+    ],
+    "description": "The candidates require operating against the normalized relational schema and avoiding denormalized reporting schemas. K092 only requires a relational database and does not cover this constraint.",
+    "suggested_fix": "Add an explicit normalized-schema/no-denormalization constraint, or map these candidates to a revised K092 that states the restriction precisely."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "C-656"
+    ],
+    "description": "The broad requirement for data-quality reports is not explicitly covered. Existing requirements cover individual data-quality reports, but do not state a general data-quality reporting capability corresponding to this candidate.",
+    "suggested_fix": "Map C-656 to a suitably broad revised requirement, or split it into concrete data-quality report requirements and map the relevant candidates individually."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "C-747",
+     "C-748"
+    ],
+    "description": "The coverage check reports these candidates as missing. Although K024 and K027 are related, they are scoped to transfer-candidate queries and transfer-result selection; they do not state the broader administrative query and manual-selection capabilities in these candidates.",
+    "suggested_fix": "If the broader administrative use case is intended, add it explicitly to K024/K027 or create a separate requirement. If only transfer use is intended, narrow the candidate statements and document that scope."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K002",
+     "K003",
+     "K057",
+     "K159"
+    ],
+    "description": "The specification uses “volume” or “location” in ways that can conflict with the glossary. “Volume counts” appears to mean item/material counts, and K003 refers to an organizational unit as “location.” K159 also exposes location as an organizational-unit field without clarifying that it is a technical database field.",
+    "suggested_fix": "Use “item count” or “material quantity” instead of “volume” when referring to Items, and use “Library” or “branch” for organizational units. Retain “location” only when naming a technical database field and explicitly define its meaning."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K026",
+     "K034",
+     "K125"
+    ],
+    "description": "These requirements use “patron” for actors who appear to be staff or general system users. K026 shares saved queries among patrons, K034 requires the patron to confirm a Transfer, and K125 says criteria are defined to patrons. This is inconsistent with the glossary and with the source candidate wording.",
+    "suggested_fix": "Replace “patron” with “user,” “staff member,” or the appropriate authorized role. In particular, Transfer confirmation should be required from the authorized Transfer user, not a Patron."
+   },
+   {
+    "kind": "conflict",
+    "keys": [
+     "K096",
+     "K023",
+     "K028",
+     "K052",
+     "K054",
+     "K055",
+     "K057",
+     "K058",
+     "K131",
+     "K132"
+    ],
+    "description": "K096 states that the system shall not manage cataloging functions, while the listed requirements require cataloging and inventory operations such as Transfers, batch Item updates, purging, status changes, deleting catalog records, and uncataloged-material management.",
+    "suggested_fix": "Resolve the scope decision. Either remove or reclassify the cataloging-operation requirements as integrations with the ILS, or revise K096 to permit the explicitly approved cataloging-management utilities. The specification must not simultaneously prohibit and require these functions."
+   },
+   {
+    "kind": "duplicate",
+    "keys": [
+     "K201",
+     "K225"
+    ],
+    "description": "Both requirements require reporting to be separated from production operations. K201 specifies a reporting database or replica, while K225 states the same separation as a general constraint, creating overlapping normative requirements.",
+    "suggested_fix": "Make K225 the high-level outcome and revise K201 as an implementation option or subordinate constraint, explicitly stating whether a separate database/replica is mandatory or merely one acceptable way to achieve separation."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K003"
+    ],
+    "description": "The description contains the malformed phrase “volume report library library scope context,” which makes the scope rule unclear and is not a clean, testable requirement statement.",
+    "suggested_fix": "Rewrite the requirement, for example: “The system shall count only Items assigned to the selected Library when calculating Material Volume Report results.”"
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K124"
+    ],
+    "description": "K124 combines two unrelated report capabilities: patrons with an invalid home Library and bibliographic records missing MARC fields. Its name refers only to MARC checks, so the requirement is internally inconsistent and difficult to test.",
+    "suggested_fix": "Split K124 into separate requirements for invalid Patron home-Library reporting and missing MARC-field reporting, with accurate names and candidate mappings."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K068",
+     "K069"
+    ],
+    "description": "K068 and K069 make individual staff assignments (“provided by Robert” and “drafted by Katherine”) system shall-statements. These are project-management assignments rather than system behavior and are likely to become obsolete or untestable as product requirements.",
+    "suggested_fix": "Move the assignments to a project plan, responsibility matrix, or requirements-workflow document. Retain only the deliverable requirement in the specification, such as implementation of the deletion trigger and definition of the deletion-report interface."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K005",
+     "K022"
+    ],
+    "description": "K005 is typed as an assumption even though it mandates configurable acquisition-window reporting, and K022 is typed as an assumption even though it mandates rollout and testing coordination. Their types do not match their normative content.",
+    "suggested_fix": "Classify K005 as functional, while placing the stored acquisition-date dependency in a separate assumption if needed. Classify K022 as documentation/process or project constraint, or move it out of the system requirements."
+   },
+   {
+    "kind": "priority",
+    "keys": [
+     "K014",
+     "C-033",
+     "C-036"
+    ],
+    "description": "K014 is marked Must even though both mapped candidates are proposed, and the requirement includes an unverified assumption that capacity data is centralized. The priority rationale treats the assumption as an essential confirmed constraint without source support.",
+    "suggested_fix": "Separate the confirmed aggregation behavior from the proposed centralization assumption, and downgrade or qualify the priority until centralized data and the mandatory aggregation scope are confirmed."
+   }
+  ]
+ },
+ {
+  "iteration": 2,
+  "approved": false,
+  "coverage_ok": true,
+  "missing_candidates": 0,
+  "score": 14,
+  "issues": [
+   {
+    "kind": "conflict",
+    "keys": [
+     "K096",
+     "K023",
+     "K024",
+     "K025",
+     "K027",
+     "K028",
+     "K029",
+     "K030",
+     "K031",
+     "K032",
+     "K034",
+     "K035",
+     "K037",
+     "K038",
+     "K040",
+     "K041",
+     "K052",
+     "K053",
+     "K054",
+     "K055",
+     "K056",
+     "K057",
+     "K058",
+     "K059",
+     "K060",
+     "K061",
+     "K062",
+     "K063",
+     "K064",
+     "K131",
+     "K132",
+     "K253"
+    ],
+    "description": "K096 states that the system shall not manage acquisitions or cataloging functions, while the listed requirements explicitly provide cataloging and item-maintenance functions such as Transfers, purging, deletion, status conversion, and WorldCat workflows.",
+    "suggested_fix": "Clarify the system boundary. Either remove or move the cataloging/maintenance requirements, or revise K096 to state that the system does not replace day-to-day ILS cataloging but may provide the explicitly approved administrative utilities and read/write operations."
+   },
+   {
+    "kind": "duplicate",
+    "keys": [
+     "K045",
+     "K046"
+    ],
+    "description": "Both requirements require merging transit-to and transit-from records into one in-transit Report. K045 already includes this behavior as well as threshold, scope, and periodic-generation requirements.",
+    "suggested_fix": "Merge K046 into K045, or make K046 explicitly cover only a distinct front-line user-interface behavior not already required by K045."
+   },
+   {
+    "kind": "duplicate",
+    "keys": [
+     "K118",
+     "K130"
+    ],
+    "description": "K118 requires demographic statistics to be anonymized and prohibits personally identifiable information, while K130 separately requires anonymization of demographic data by deleting identifying elements. These are substantially overlapping privacy requirements.",
+    "suggested_fix": "Consolidate the anonymization rule into one requirement, or clearly separate archive-level de-identification from report-generation-level anonymization and define the different controls and acceptance criteria."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K066",
+     "C-126"
+    ],
+    "description": "K066 calls the people who delete records “Patrons,” but C-126 refers to “users.” Under the glossary, Patron means a person with a library account, whereas deletion actors are authenticated staff or administrators and should be Users.",
+    "suggested_fix": "Replace “top Patrons who delete the most records” with “top Users” or “top staff/administrators,” consistently throughout K066."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K154",
+     "C-292",
+     "C-352",
+     "C-469"
+    ],
+    "description": "The specification and mapped candidates use “Non-Cat,” “non-cat,” and the misspelling “uncatologed.” The glossary requires “Uncataloged material” and says to avoid “non-cat.”",
+    "suggested_fix": "Use “Uncataloged material” consistently, and correct “uncatologed” to “uncataloged” in K154 and its candidate-derived report names/descriptions."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K011",
+     "K015"
+    ],
+    "description": "These requirements use “organizational units” and “locations” for the branch overview, although the glossary defines Library as the organizational unit and specifically discourages location as a synonym for Library or branch.",
+    "suggested_fix": "Replace these uses with “Libraries” or “Library branches,” reserving “Item location field” for the technical item-record field."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K065",
+     "C-115",
+     "C-119"
+    ],
+    "description": "K065 uses “location” for the actor’s branch, but the glossary discourages location as a synonym for an organizational Library. This is also distinct from the defined Item location field.",
+    "suggested_fix": "Rename the audit field or description to “performing user’s Library/branch” if that is the intended organizational value; use “Item location field” only for Item records."
+   },
+   {
+    "kind": "conflict",
+    "keys": [
+     "K036",
+     "K224"
+    ],
+    "description": "K036 says Transfer alerts may be received by patrons or staff, while K224 establishes that Patrons are not direct system users and receive only indirect access through OPAC displays. Direct patron notifications from this system are therefore inconsistent with the stated access boundary.",
+    "suggested_fix": "Restrict K036 to authenticated Users/staff, or explicitly define an indirect OPAC-mediated notification mechanism and reconcile it with K224."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "K014",
+     "C-033"
+    ],
+    "description": "C-033 requires aggregation by querying a centralized database, but K014 explicitly says that centralized storage is not mandated and only requires aggregation across branches. The candidate’s centralized-database content is not covered by K014.",
+    "suggested_fix": "Map C-033 to K248 if the centralized database is retained as an assumption, or revise C-033 to require only cross-branch aggregation without prescribing centralized storage."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "K018",
+     "C-052"
+    ],
+    "description": "C-052 requires an investigation into shelf-space estimation methods performed by a named person, whereas K018 requires the implemented estimation behavior and does not require an investigation or named deliverable. The candidate is not actually covered by K018.",
+    "suggested_fix": "Discard the named-person assignment as project management, or create a separate documentation/assumption requirement for investigating estimation methods and map C-052 there."
+   },
+   {
+    "kind": "traceability",
+    "keys": [
+     "K198",
+     "C-462",
+     "C-732"
+    ],
+    "description": "K198 says Patrons may save report definitions and queries, but both mapped candidates say Users. The glossary also distinguishes Patrons from authenticated staff or administrative Users; allowing Patrons to save report definitions is unrelated to the mapped candidate intent.",
+    "suggested_fix": "Change K198 to “Users” or “authenticated staff/reporting users,” or remap only if patron-facing report saving is genuinely intended and reconcile it with K224."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K051",
+     "C-094"
+    ],
+    "description": "K051 is classified as an Operating Environment constraint but its description says the system is assumed to track statuses and maintain the transit table. C-094 is explicitly an assumption, so the requirement type and wording are inconsistent.",
+    "suggested_fix": "Classify K051 as an assumption, or split it into a testable detection constraint and a separate assumption about the availability of status and transit data."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K147",
+     "K211",
+     "K213",
+     "K214",
+     "K254"
+    ],
+    "description": "These requirements contain materially vague acceptance language: “updated easily,” “optimal distribution,” “analyze staff productivity,” “tracking and verifying,” and “efficient cleanup” do not define measurable behavior or outcomes.",
+    "suggested_fix": "Add observable acceptance criteria, such as permitted operations and response targets for K147, explicit capacity/distribution metrics for K211, defined productivity measures for K213, verification/audit actions for K214, and measurable processing-time or throughput targets for K254."
+   },
+   {
+    "kind": "priority",
+    "keys": [
+     "K130",
+     "K118"
+    ],
+    "description": "K130 is prioritized Should even though K118, a Must requirement, already mandates anonymized demographic statistics and prohibits exposure of personally identifiable information. The overlapping privacy control has inconsistent priority.",
+    "suggested_fix": "After consolidating the requirements, assign the single anonymization/privacy requirement the priority supported by the applicable legal or agreed source; if K118 remains Must, do not retain a lower-priority duplicate control."
+   }
+  ]
+ },
+ {
+  "iteration": 3,
+  "approved": false,
+  "coverage_ok": true,
+  "missing_candidates": 0,
+  "score": 11,
+  "issues": [
+   {
+    "kind": "duplicate",
+    "keys": [
+     "K087",
+     "K200"
+    ],
+    "description": "Both requirements mandate background or queued processing for long-running reports so interactive or production operations are not blocked. K087 is the broader non-disruptive reporting requirement, while K200 repeats the same behavior for long-running reports.",
+    "suggested_fix": "Merge K200 into K087, or make K200 explicitly subordinate by limiting it to a distinct technical acceptance criterion not already covered by K087."
+   },
+   {
+    "kind": "duplicate",
+    "keys": [
+     "K001",
+     "K002"
+    ],
+    "description": "K001 already requires category breakdown counts in the Material Volume Report, while K002 separately requires customizable material quantity categories and reporting by category. The overlap is substantial and the boundary between fixed Material Volume categories and configurable categories is unclear.",
+    "suggested_fix": "Clarify the boundary: keep K001 limited to the fixed required Material Volume Report contents (including adult fiction and board books), and make K002 exclusively cover administrator-defined category configuration and generalized category-based reporting."
+   },
+   {
+    "kind": "vocabulary",
+    "keys": [
+     "K096",
+     "K101",
+     "K134",
+     "K146",
+     "K154"
+    ],
+    "description": "The requirements use glossary-avoided terminology. K096 and K101 use “ILS” instead of the preferred “Library Automation System”; K146 uses “library/location” where “Library” should be used for the organizational unit; K134 and K154 use “Non-Cat/non-cat” and “non-category” when referring to Uncataloged material.",
+    "suggested_fix": "Replace “ILS” with “Library Automation System,” replace organizational “location” with “Library” or “destination” as appropriate, and replace “Non-Cat/non-cat/non-category” with “Uncataloged material.” Preserve legacy report names only as explicitly labeled external/canned report titles if necessary."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "K177",
+     "C-545"
+    ],
+    "description": "C-545 requires multiple scheduling outputs and multiple output formats for scheduled reports. K177 covers scheduling timing and cancellation but does not require multiple output formats for scheduled reports. The candidate is only partially covered and its output-format content is unrelated to K177.",
+    "suggested_fix": "Map C-545 to K178 for output formats, and to K177 only for its scheduling aspect; or split C-545 into separate candidates and map each part to the appropriate requirement."
+   },
+   {
+    "kind": "missing",
+    "keys": [
+     "K190",
+     "C-535"
+    ],
+    "description": "C-535 specifically requires snapshot bills history, whereas K190 describes general historical reporting and snapshots of data such as shelving location. The requirement does not explicitly provide historical snapshot reporting for billing state.",
+    "suggested_fix": "Either add an explicit billing-history/snapshot clause to K190 or create a separate requirement for historical bills snapshots and map C-535 to it."
+   },
+   {
+    "kind": "traceability",
+    "keys": [
+     "K143",
+     "C-322",
+     "C-497"
+    ],
+    "description": "C-322 and C-497 require a price-value report by call number or shelving location. K143 covers item value reporting and filtering by status, format, and collection attributes, but does not cover call-number or shelving-location aggregation/filtering. The mapped candidate content is therefore not fully traceable.",
+    "suggested_fix": "Add call-number and shelving-location filtering/grouping to K143, or map these candidates to a separate item-value-by-location requirement."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K161",
+     "C-325",
+     "C-326",
+     "C-498",
+     "C-499"
+    ],
+    "description": "K161 says the system shall generate bibliographic edited and added-by-user reports, but also says those reports were indicated as “not available.” This creates an internally contradictory requirement and does not faithfully represent candidates that explicitly state non-availability.",
+    "suggested_fix": "Decide whether these reports are in scope. If yes, remove the “not available” qualification and define acceptance criteria; if no, discard or defer the candidates rather than asserting that the reports shall be generated."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K211",
+     "K213",
+     "K214",
+     "K254"
+    ],
+    "description": "These requirements use vague, weakly testable terms: “optimal distribution,” “analyze staff productivity and workflow,” “track and verify,” and “efficient”/“timely” cleanup. They lack defined outputs, measures, thresholds, or acceptance conditions.",
+    "suggested_fix": "Define measurable report outputs and acceptance criteria, such as required dimensions, calculations, supported workflows, maximum processing time, or throughput targets. If the intent is only scope guidance, classify these as goals or scope statements rather than testable requirements."
+   },
+   {
+    "kind": "conflict",
+    "keys": [
+     "K096",
+     "K023",
+     "K024",
+     "K028",
+     "K054",
+     "K055",
+     "K057",
+     "K058",
+     "K131"
+    ],
+    "description": "K096 states that the system shall not manage acquisitions or cataloging functions, while the listed Cataloging requirements provide substantial item-transfer, purge, deletion, uncataloged-inventory, and status-maintenance utilities. The descriptions attempt to limit the boundary to administrative utilities, but K096 does not state that exception clearly enough.",
+    "suggested_fix": "Rewrite K096 to state explicitly that day-to-day acquisitions and cataloging remain in the Library Automation System, while the approved administrative maintenance and transfer utilities in K023–K058 and K131 are permitted within this system boundary."
+   },
+   {
+    "kind": "priority",
+    "keys": [
+     "K063",
+     "C-112"
+    ],
+    "description": "K063 is a Could requirement whose rationale says scheduled purging was only questioned and has no agreed contractual requirement. Retaining it as a system shall requirement, even at Could priority, makes the specification stronger than the source evidence supports.",
+    "suggested_fix": "Either discard/defer C-112 as unresolved, or mark K063 explicitly as a proposed option/decision pending stakeholder approval rather than a normative “shall” requirement."
+   },
+   {
+    "kind": "quality",
+    "keys": [
+     "K220"
+    ],
+    "description": "K220 assumes readers need not have common Library terminology defined, while the specification includes a glossary and uses several specialized terms. The assumption is not clearly scoped to common terms versus project-specific terminology and could undermine consistent vocabulary.",
+    "suggested_fix": "State that the glossary remains authoritative and that only generally understood domain terms may be omitted from explanatory text; require all project-specific terms and glossary distinctions to be used consistently."
+   }
+  ]
+ }
+]
